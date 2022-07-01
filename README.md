@@ -140,3 +140,28 @@ else {
     // Do something
 }
 ```
+
+### Switch
+
+The syntax for switch statements:
+
+```go
+// Variable assignment may be done in switch
+switch x := check(3) {
+    // Multiple cases can share the same action
+    case 1, 2, 3:
+        // Do something
+
+    // Fallthrough keyword allows bottom cases to be checked
+    // and evaluated also
+    case 100:
+        fallthrough
+
+    // Checks may be done here
+    case x > 233:
+        // Do something
+
+    default:
+        // Do something
+}
+```
