@@ -9,7 +9,10 @@ type Room struct {
 
 func checkCleanliness(rooms [4]Room) {
 	for i := 0; i < len(rooms); i++ {
+
+		// Making a copy of the array element
 		room := rooms[i]
+
 		fmt.Print(room.name, " ")
 		if room.cleaned {
 			fmt.Println("is cleaned")
