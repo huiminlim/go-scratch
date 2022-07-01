@@ -326,3 +326,16 @@ board := [][]string{
 }
 board[0][0] = "x"
 ```
+
+### Ranges
+
+Ranges are largely useful to access each element in a string.
+
+For example:
+
+```go
+a := "Hello"
+for _, ch := range a {
+    fmt.Printf("%q ", ch)
+}
+```
