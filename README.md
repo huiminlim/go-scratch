@@ -165,3 +165,39 @@ switch x := check(3) {
         // Do something
 }
 ```
+
+### Loops
+
+The syntax for for-loops:
+
+```go
+for i := 0; i < 10; i++{
+    // Do something
+}
+```
+
+Loop counter can also be adjusted outside of the for statement:
+
+```go
+for i < 10;{
+    // Do something
+    i++
+}
+```
+
+Infinite loops may be created using `for` also.
+
+```go
+for {
+    // Do something
+    if done {
+        // Exit loop
+        break
+    }
+    else {
+        // Move on to next iteration of loop
+        continue
+    }
+    // Do other things
+}
+```
