@@ -339,3 +339,60 @@ for _, ch := range a {
     fmt.Printf("%q ", ch)
 }
 ```
+
+### Maps
+
+A map can be created for easy key-value pair access.
+
+```go
+// Map with string key and integer value
+// Uninitialized map
+myMap := make(map[string]int)
+
+// Initialize map
+myMap2 :=  map[string]int{
+    "item 1": 1,
+    "item 2": 2,
+    "item 3": 3,
+}
+```
+
+There are some map operations - insert, read, delete, check existence.
+
+```go
+// Creating uninitialized map
+myMap := make(map[string]int)
+
+// Insert key-pair
+myMap["Favourite number"] = 5
+
+// Read value from key
+fav := myMap["Favourite number"]
+missing := myMap["age"] // returns default
+
+// Delete key
+delete(myMap, "Favourite number")
+
+// Check existence
+price, found := myMap["price"]
+if !found{
+    fmt.Println("price not found")
+    return
+}
+```
+
+Iterating between maps can be done with range.
+
+```go
+// Initialize map
+myMap2 :=  map[string]int{
+    "item 1": 1,
+    "item 2": 2,
+    "item 3": 3,
+}
+
+// Iterating maps using range
+for key, value := range myMap {
+    // print
+}
+```
