@@ -240,3 +240,25 @@ sample := struct{
     1, 2,
 }
 ```
+
+### Array
+
+Arrays store elements of the same kind of data type.
+
+Arrays are fixed size and start with index 0;
+
+An array can be created this way:
+
+```go
+// Creating array of int uninitialized
+var myArray [3]int
+
+// Creating an array with specified number of default values
+myArray := [3]int{7, 8, 9}
+
+// Creating an array with some number of default values
+myArray := [...]int{1, 2, 3, 4}
+
+// Creating an array with 3 initialized values and 1 uninitialized
+myArray := [4]int{7, 8, 9}
+```
