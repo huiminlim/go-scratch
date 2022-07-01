@@ -199,3 +199,44 @@ for {
     // Do other things
 }
 ```
+
+## Structures
+
+A structure can be defined with the following syntax:
+
+```go
+// Defining a struct named "Sample"
+type Sample struct {
+    field string
+    a, b int
+}
+
+// Instantiating a sample
+data := Sample{"word", 1, 2}
+
+// Alternative method
+data2 := Sample {
+    field: "word",
+    a: 1,
+    b: 2
+}
+
+// Using default values for uninitialized
+data3 := Sample{}
+
+// Defining only certain fields
+data := Sample{a: 5}
+```
+
+Inline anonymous structures can be defined also.
+
+```go
+// All fields must be created and assigned upon struct definition
+sample := struct{
+    field string
+    a, b int
+}{
+    "hello",
+    1, 2,
+}
+```
