@@ -124,3 +124,19 @@ func many() (int, int, int) {
     return 1, 2, 3
 }
 ```
+
+### If-Else
+
+The syntax for if-else:
+
+```go
+if age >= 21 {
+    // Do something
+}
+else if age < 21 && age >= 15 {
+    // Do something
+}
+else {
+    // Do something
+}
+```
