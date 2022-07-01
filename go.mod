@@ -1,3 +1,3 @@
-module demo/variables
+module demo
 
 go 1.18

@@ -45,6 +45,8 @@ require (
 )
 ```
 
+To create a Go module file, issue the `go mod init` command
+
 ## Introduction
 
 ### Variables
