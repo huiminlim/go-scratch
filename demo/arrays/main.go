@@ -14,6 +14,7 @@ func checkCleanliness(rooms [4]Room) {
 		room := rooms[i]
 
 		fmt.Print(room.name, " ")
+
 		if room.cleaned {
 			fmt.Println("is cleaned")
 		} else {
