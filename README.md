@@ -262,3 +262,67 @@ myArray := [...]int{1, 2, 3, 4}
 // Creating an array with 3 initialized values and 1 uninitialized
 myArray := [4]int{7, 8, 9}
 ```
+
+### Slices
+
+Slices are "views" of arrays, or subarray.
+
+A slice can be created with an array underlying it.
+
+```go
+// Slice when there is no number of elements in square bracket
+mySlice := []int{1, 2, 3}
+
+// Accessing element in slice
+a := mySlice[0]
+```
+
+Slices may be created from arrays.
+
+```go
+// Creating a slice from an array
+myArray := [...]int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+
+// Creating slice from entire array
+slice := myArray[:]
+
+// Creating slice from start index to end
+slice2 := myArray[1:]
+
+// Creating slice from element 1 to idx - 1
+slice3 := myArray[1:idx-1]
+```
+
+Slices may be appended to with additional elements or other slices.
+
+```go
+slice := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+
+// Appending with extra elements
+// and reassign to existing slice
+slice = append(slice, 1, 2, 3)
+
+// Appending slice with slices
+// and reassign to existing slice
+part1 := []int{0, 1}
+part2 := []int{2, 3}
+// 3 dots required to unwrap the previous slice into numbers
+slice = append(slice, part1, part2...)
+```
+
+Preallocation of slices capacity may be done. For performance to cut computation time.
+
+```go
+slice := make([]int, 10)
+```
+
+Multidimensional slices can also be created.
+
+```go
+board := [][]string{
+    []string {"_", "_", "_"},
+    {"_", "_", "_"},
+    {"_", "_", "_"},
+}
+board[0][0] = "x"
+```
