@@ -34,25 +34,25 @@ func rollDice(numDice int, numRoll int, numSide int) int {
 	// Create and initialize sum
 	sum := 0
 
-	for i := 0; i < numDice; i++ {
-		for r := 0; r < numRoll; r++ {
+	for r := 0; r < numRoll; r++ {
+		for i := 0; i < numDice; i++ {
 			// rand.Intn(numSide) returns number from [0,numSide-1]
 			// add 1 to adjust to [1, numSide]
 			sum += (rand.Intn(numSide) + 1)
 		}
-	}
 
-	// Perform checks
-	if numRoll == 2 && numDice == 2 {
-		fmt.Println("Snake eyes")
-	} else if numRoll == 7 {
-		fmt.Println("Lucky 7")
-	}
+		// Perform checks
+		if sum == 2 && numDice == 2 {
+			fmt.Println("Snake eyes")
+		} else if sum == 7 {
+			fmt.Println("Lucky 7")
+		}
 
-	if numRoll%2 == 0 {
-		fmt.Println("Even")
-	} else {
-		fmt.Println("Odd")
+		if sum%2 == 0 {
+			fmt.Println("Even")
+		} else {
+			fmt.Println("Odd")
+		}
 	}
 
 	return sum
