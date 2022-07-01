@@ -100,3 +100,23 @@ Constant variables may be created using `const` keyword.
 // Convention to use capital case for words
 const MaxSpeed = 40;
 ```
+
+### Functions
+
+The syntax of a function is:
+
+```go
+// Use camelCase
+func name(param1 type, param2 type) type {
+    // Body
+}
+```
+
+Multiple return values can be supported.
+
+```go
+// Multiple return function
+func many() (int, int, int) {
+    return 1, 2, 3
+}
+```
