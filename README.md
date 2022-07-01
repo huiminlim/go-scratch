@@ -132,11 +132,9 @@ The syntax for if-else:
 ```go
 if age >= 21 {
     // Do something
-}
-else if age < 21 && age >= 15 {
+} else if age < 21 && age >= 15 {
     // Do something
-}
-else {
+} else {
     // Do something
 }
 ```
