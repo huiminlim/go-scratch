@@ -548,3 +548,31 @@ Using `fmt.Printf` allows the text to be formatted according to verbs.
 With an `init()` function, it will be run before the `main()` function and commonly used to perform initialization.
 
 All packages can have an `init()` function, and all the `init()` functions will run before the `main()` actually runs.
+
+### Testing
+
+To create tests for Go packages, import the `testing` package.
+
+Test file to accompany a Go file is as such: `sample.go` and `sample_test.go`.
+
+Some test functions include: `Fail()`, `Errorf(string)`, `FailNow()`, `Fatalf(string)`, `Logf()`.
+
+Test tables can be used to test more than 1 set of test data to drive the tests.
+
+For example:
+
+```go
+func TestAddQueue(t *testing.T){ // Required function signature for test
+    q := New(3)
+    for i := 0; i < 3; i++ {
+        if len(q.items) != i {
+            t.Errorf("Incorrect queue element count: %v, want %v", len(q.items), i)
+        }
+        if !q.Append(i) {
+            t.Errorf("Failed to append item %v to queue", i)
+        }
+    }
+}
+```
+
+Use command `go test -v ./demo/testing` to run test and show all tests ran.
