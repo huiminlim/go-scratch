@@ -859,3 +859,61 @@ Some built-in constraints from `constraints` package.
 | `Integer`    | All integers                               |
 | `Float`      | All floating point numbers                 |
 | `Complex`    | All complex numbers                        |
+
+## Concurrent Programming
+
+### Function Literals
+
+Allows a function to be defined within a function.
+
+For example:
+
+```go
+func HelloWorld() {
+    fmt.Printf("Hello, ")
+    world := func() {
+        fmt.Printf("World)
+    }
+    world()
+    world()
+    world()
+}
+```
+
+A function can also receive a function as an input parameter.
+
+```go
+// Takes in a function that accepts
+// a function with input parameter of string
+// and a string message
+func customMsg(fn func(m string), msg string) {
+    msg = strings.ToUpper(msg)
+    fn(msg)
+}
+
+// Function returns a function with input parameter of string
+func runner() func(msg string) {
+    return func(msg string){
+        fmt.Println(msg)
+    }
+}
+
+// Call function
+customMsg(runner(), "hello")
+```
+
+A closure is a function literal that can use variables from outside the scope.
+
+```go
+discount := 0.1
+discountFn := func(subTotal float64) float64 {
+    // Copies discount by value
+    if subTotal < 100.0 {
+        discount += 0.1
+    }
+    return discount
+}
+
+// Type aliasing
+type DiscountFunc func(subtotal float64) float64
+```
