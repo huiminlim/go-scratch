@@ -800,3 +800,62 @@ func talk(t Talker){
     fmt.Println(t.Whisper())
 }
 ```
+
+## Generics
+
+Generic functions means a function can accept different input types.
+
+For example:
+
+```go
+// Comparable is an interface
+// allowing a type to be compared
+func IsEqual[T comparable](a, b T) bool {
+    return a == b
+}
+
+// Usages
+IsEqual(2, 2)
+IsEqual[uint8](4, 4)
+```
+
+Constraints can be created to restrict the types that the generic function can accept.
+
+```go
+// Constraint restricts to 32-bits integer
+type Integers32 interface {
+    int32 | uint32
+}
+
+func SumNumbers[T Integer32](arr []T) T {
+    var sum T
+    for i := 0; i < len(arr); i++ {
+        sum += arr[i]
+    }
+    return sum
+}
+
+// The type MUST implement the EXACT integer type
+// from the interface
+nums := []int32{1, 2, 3}
+nums2 := []uint32{1, 2, 3}
+total := SumNumbers(nums)
+total2 := SumNumbers(nums2)
+
+// The below is not allowed
+type MyInt int32
+nums := []MyInt{MyInt(1)} // This when passed to function, does not compile
+```
+
+Some built-in constraints from `constraints` package.
+
+| Constraints  | Description                                |
+| ------------ | ------------------------------------------ |
+| `any`        | Any type                                   |
+| `comparable` | Anything that can be compared for equality |
+| `Unsigned`   | All unsigned integers                      |
+| `Signed`     | All signed integers                        |
+| `Ordered`    | Sortable types (numbers, strings)          |
+| `Integer`    | All integers                               |
+| `Float`      | All floating point numbers                 |
+| `Complex`    | All complex numbers                        |
