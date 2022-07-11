@@ -542,3 +542,9 @@ Using `fmt.Printf` allows the text to be formatted according to verbs.
 | `%e` | Scientific notation   |
 
 `fmt.Sprintf` returns a formatted string, while `fmt.Fprintf` writes to a file stream.
+
+### `init` Function
+
+With an `init()` function, it will be run before the `main()` function and commonly used to perform initialization.
+
+All packages can have an `init()` function, and all the `init()` functions will run before the `main()` actually runs.
