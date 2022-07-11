@@ -425,3 +425,48 @@ i := 1
 increment(&i)
 // x is now 2
 ```
+
+## Idiomatic Go
+
+### Receiver Functions
+
+Receiver functions are functions to operate on structs directly.
+
+There are **Pointer** and **Value** receiver functions.
+
+For example, **Pointer** receiver function:
+
+```go
+// struct to use
+type Coordinate struct {
+    x, y int
+}
+
+// Pointer Receiver function to shift x, y by some number
+func (coord *Coordinate) shiftBy(x, y int){
+    coord.x += x
+    coord.y += y
+}
+
+// Execute the receiver function
+coord := Coordinate{5, 5}
+coord.shiftBy(1, 1) // (6, 6)
+```
+
+And **Value** receiver function.
+
+```go
+// struct to use
+type Coordinate struct {
+    x, y int
+}
+
+// Value Receiver function to return by value another struct
+func (c Coordinate) Dist(other Coordinate) Coordinate {
+    return Coordinate{c.x - other.x, c.y - other.y}
+}
+
+first := Coordinate{5, 5}
+second := Coordinate{1, 1}
+distance := first.Dist(second) // (4, 4)
+```
