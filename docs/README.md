@@ -616,3 +616,82 @@ execute(m)
 // Calling by pointer
 execute(&m)
 ```
+
+## Error Handling
+
+Go has no errors, i.e. no try-catch, but only status replies from function signature.
+
+If no error, `nil` is replied. Else if error, `error` is returned with string.
+
+For example:
+
+```go
+import "errors"
+
+func divide(lhs, rhs int) (int, error){
+    if rhs == 0 {
+        return 0, errors.New("Cannot divide 0")
+    } else {
+        return rhs / lhs, nil
+    }
+}
+```
+
+This is because standard errors are interfaces.
+
+```go
+// The standard library implements errors as an interface
+type error interface {
+    Error() string
+}
+```
+
+Implement the error as a receiver function.
+
+```go
+// Division error denoting values divided for check
+type DivError struct {
+    a, b int
+}
+
+// Interface of error
+// implemented as a receiver function
+func (d * DivError) Error() string {
+    return fmt.Sprintf("Cannot divide by zero: %d / %d", d.a, d.b)
+}
+
+func div(a, b int) (int, error) {
+    if b == 0 {
+        return 0, &DivError{a, b} // returning as pointer to type created
+    } else {
+        return a / b, nil
+    }
+}
+```
+
+To find out the type of error, use `errors.Is()`.
+
+```go
+_, err := someFunc("sample")
+if err != nil {
+    // Create error type to check against received error
+    var InputError = UserError{"error"}
+    if errors.Is(err, &InputError) {
+        // confirmed
+    }
+}
+```
+
+To act on that specific error's internal variables, use `errors.As()`.
+
+```go
+_, err := someFunc("sample")
+if err != nil {
+    // Create error type to check against received error
+    var temp *UserError
+    if errors.As(err, &temp) {
+        // confirmed
+        fmt.Println("User error:", temp)
+    }
+}
+```
