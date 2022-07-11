@@ -509,3 +509,21 @@ const (
     i5
 )
 ```
+
+### Variadics
+
+Variadic functions accept multiple input parameters into the function, denoted by `...`.
+
+For example:
+
+```go
+// Variadic functions accept unknown number of input parameters
+// here, "nums" are slices
+func sum(nums ...int) int {
+    sum := 0
+    for _, n := range nums {
+        sum += n
+    }
+    return sum
+}
+```
