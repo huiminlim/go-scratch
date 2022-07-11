@@ -527,3 +527,18 @@ func sum(nums ...int) int {
     return sum
 }
 ```
+
+### Text Formatting
+
+Using `fmt.Printf` allows the text to be formatted according to verbs.
+
+| Verb | Description           |
+| ---- | --------------------- |
+| `%v` | Default               |
+| `%t` | `true` or `false`     |
+| `%c` | Character from a rune |
+| `%X` | Hex                   |
+| `%U` | Unicode format        |
+| `%e` | Scientific notation   |
+
+`fmt.Sprintf` returns a formatted string, while `fmt.Fprintf` writes to a file stream.
