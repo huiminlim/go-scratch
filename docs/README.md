@@ -765,3 +765,38 @@ if scanner.Err() != nil {
     fmt.Println(scanner.Err())
 }
 ```
+
+## Type Embedding
+
+Allows some interface to be "embedded" into another interface.
+
+So that interface must implement all embedded function.
+
+As such, the embedded struct type will be able to access **ALL** the lower structs fields and function. This is called promoted field and methods.
+
+For example:
+
+```go
+// First interface
+type Whisperer interface {
+    Whisper() string
+}
+
+// Second interface
+type Yeller interface {
+    Yell() string
+}
+
+// Embedded interface
+// must embed both the Whisperer and Yeller interface
+type Talker interface {
+    Whisperer
+    Yeller
+}
+
+// Function that takes in the embedded interface
+func talk(t Talker){
+    fmt.Println(t.Yell())
+    fmt.Println(t.Whisper())
+}
+```
