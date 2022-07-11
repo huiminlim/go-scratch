@@ -576,3 +576,43 @@ func TestAddQueue(t *testing.T){ // Required function signature for test
 ```
 
 Use command `go test -v ./demo/testing` to run test and show all tests ran.
+
+## Interfaces
+
+Interfaces are a set of functions that a type has to implement.
+
+Interfaces are usually implemented "implicitly", i.e. it is "implemented" when they have all.
+
+Best practices to not accept pointer in interface, so that caller can use either pointer or value.
+
+For example:
+
+```go
+// Sample interface defined with `interface` keyword
+type MyInterface interface {
+    Function1()
+    Function2(x int) int
+}
+
+// Declaring a type and implementing all functions
+// required by the interface
+type MyType int
+func (m MyType) Function1() {}
+func (m MyType) Function2(x int) int {
+    return x * x
+}
+
+// Sample function that takes in interface
+// as type
+func execute(i MyInterface) {
+    i.Function1()
+}
+
+m := MyType(1)
+
+// Calling by value
+execute(m)
+
+// Calling by pointer
+execute(&m)
+```
