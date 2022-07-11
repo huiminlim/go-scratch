@@ -470,3 +470,42 @@ first := Coordinate{5, 5}
 second := Coordinate{1, 1}
 distance := first.Dist(second) // (4, 4)
 ```
+
+### Iota
+
+The `iota` can automatically assign values to constants, similar to enumerations.
+
+For example:
+
+```go
+// Long form
+const (
+    l0 = iota   // 0
+    l1 = iota   // 1
+)
+
+// Short form
+const (
+    s0 = iota   // 0
+    s1          // 1
+)
+```
+
+Skipping values and starting from another default start may be done also.
+
+```go
+// Skipping a value unrequired
+const (
+    s0 = iota   // 0
+    _           // 1 (skipped)
+    _           // 2 (skipped)
+    s3          // 3
+)
+
+// Starting at 3
+const (
+    i3 = iota + 3   // 3
+    i4
+    i5
+)
+```
