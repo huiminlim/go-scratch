@@ -917,3 +917,36 @@ discountFn := func(subTotal float64) float64 {
 // Type aliasing
 type DiscountFunc func(subtotal float64) float64
 ```
+
+### Defer
+
+`defer` runs operations after operations complete.
+
+```go
+func one() {
+    fmt.Println("1")
+}
+
+func two() {
+    fmt.Println("2")
+}
+
+func three() {
+    fmt.Println("3")
+}
+
+func sample() {
+    fmt.Println("begin")
+
+    // Defer is placed on stack
+    // so LIFO operation
+    // 3, 2, 1
+    defer one()
+    defer two()
+    defer three()
+
+    fmt.Println("End")
+}
+```
+
+A usecase for this is when closing a file after end of use.
