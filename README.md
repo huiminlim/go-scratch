@@ -396,3 +396,32 @@ for key, value := range myMap {
     // print
 }
 ```
+
+### Pointers
+
+Pointers are indicated with a `*`.
+
+To create a pointer from a variable, use the `&`.
+
+```go
+// Creating a pointer from variable
+value := 10
+var valuePtr *int // creating uninitialized pointer
+valuePtr = &value
+
+// Create and assign pointer variable
+value2 := 10
+valuePtr2 := &value2
+```
+
+The `*` dereferences the pointer to the value at the memory.
+
+```go
+func increment(x *int){
+    *x += 1
+}
+
+i := 1
+increment(&i)
+// x is now 2
+```
