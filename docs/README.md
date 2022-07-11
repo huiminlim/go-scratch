@@ -695,3 +695,73 @@ if err != nil {
     }
 }
 ```
+
+## Readers & Writers
+
+Readers & Writers are I/O interfaces, e.g. sockets, files, arbitrary arrays.
+
+Usually low-level implementation, so work with `bufio` package than `Reader` directly.
+
+These are usually implemented as interfaces.
+
+```go
+// Reader interface type
+type Reader interface {
+    Read(p []byte) (n int, err error)
+}
+
+// Writer interface
+type Writer interface {
+    Write(p []byte) (n int, err error)
+}
+```
+
+The error type is returned to check if all bytes read, so error will be `io.EOF` instead of `nil`.
+
+For example:
+
+```go
+// Source of string to read from
+reader := strings.NewReader("Sample")
+
+// Create a new string to copy to
+var newString strings.Builder
+
+// Read string from source and copy to dest
+buffer := make([]byte, 4)
+for {
+    numBytes, err := reader.Read(buffer)
+    chunk := buffer[:numBytes]
+    newString.Write(chunk)
+    fmt.Printf("Read %v bytes: %c\n", numBytes, chunk)
+    if err == io.EOF{
+        break
+    }
+}
+```
+
+The `bufio` package is used directly to avoid using multiple copying to-fro buffers.
+
+```go
+source := strings.NewReader("Sample")
+buffered := bufio.NewReader(source)
+newString, err := buffered.ReadString("\n")
+if err == io.EOF {
+    fmt.Println(newString)
+} else {
+    fmt.Println("Error occured")
+}
+```
+
+Some other useful functions, e.g. `bufio.Scanner` to read from stdin.
+
+```go
+scanner := bufio.NewScanner(os.Stdin)
+lines := make([]string, 0, 5)
+for scanner.Scan() {
+    lines.append(lines, scanner.Text())
+}
+if scanner.Err() != nil {
+    fmt.Println(scanner.Err())
+}
+```
