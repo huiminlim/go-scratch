@@ -978,3 +978,53 @@ func main() {
     fmt.Println("end program")
 }
 ```
+
+### Channels
+
+Basically a two-ended pipe that allows read (receive) and write (send) data in each end.
+
+Channels may be **unidirectional** or **bidirectional**.
+
+Allows goroutine to communicate with each other in FIFO order.
+
+Buffered channels have capacity and can store data, whereas unbuffered channels cause the sender to block until the reader is available.
+
+The `chan` keyword creates a channel.
+
+For example, a **unidirectional** channel:
+
+```go
+// Create channel
+channel1 := make(chan int)       // Unbuffered channel
+channel2 := make(chan int, 2)    // Buffer is 2
+
+// Create functions that send data to channel
+// using <- arrows
+go func() { channel1 <- 1 }()
+second := <-channel1            // Block until channel1 receives data
+
+go func() { channel2 <- 2 }()
+go func() { channel2 <- 3 }()
+first := <-channel2
+third := <-channel2
+```
+
+Channels can be selected with the `select` keyword to work with multiple potentially blocking channels.
+
+```go
+// Blocking channels
+one := make(chan int)
+two := make(chan int)
+
+for {
+    select {
+        case o := <-one :
+            fmt.Println("one:", o)
+        case t := <-two :
+            fmt.Println("two:", t)
+        default:
+            fmt.Println("no data")
+            time.Sleep(50 * time.Millisecond)
+    }
+}
+```
