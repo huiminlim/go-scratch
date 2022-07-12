@@ -950,3 +950,31 @@ func sample() {
 ```
 
 A usecase for this is when closing a file after end of use.
+
+### Goroutine
+
+Goroutines allow functions, function literals or closures to run concurrently.
+
+It will select parallel or asynchronous execution automatically.
+
+The function that starts the goroutine will **not** wait for it to finish.
+
+The `go` keyword is used.
+
+```go
+// Function to execute in goroutine
+func count(amount int) {
+    for i := 1; i <= amount; i++ {
+        time.Sleep(100 * time.Millisecond)
+        fmt.Println(i)
+    }
+}
+
+// Execute the goroutine
+func main() {
+    go count(5) // spawn goroutine
+    fmt.Println("Wait for goroutine")
+    time.Sleep(1000 * time.Millisecond)
+    fmt.Println("end program")
+}
+```
