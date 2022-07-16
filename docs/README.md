@@ -1028,3 +1028,80 @@ for {
     }
 }
 ```
+
+### Synchronization
+
+One form of synchronization is **mutex**.
+
+Mutexes in Go can be found in the `sync` package.
+
+The `defer` keyword is useful, as it can be used to unlock a mutex, after operation is completed.
+
+Note: This is useful only if the entire operation is short and requires the data to be used for the bulk of the function.
+
+For example:
+
+```go
+import "sync"
+
+// Data struct with mutex
+type SyncedData struct {
+    inner map[string] int
+    mutex sync.Mutex
+}
+
+// A receiver function to acquire lock before performing
+// action on data
+func (d *SyncedData) Insert(k string, v int) {
+    d.mutex.Lock()
+    defer d.mutex.Unlock() // defer the unlock until the end of function is completed
+    d.inner[k] = v
+}
+
+// Another receiver function to acquire lock before performing
+// action on data
+func (d *SyncedData) Get(k string, v int) int {
+    d.mutex.Lock()
+    data := d.inner[k]
+    d.mutex.Unlock()
+    return data
+}
+
+// Running the functions
+data := SyncedData{inner: make(map[string]int)}
+data.Insert("sample", 4)
+data.Insert("test", 2)
+fmt.Println(data.Get("sample"))
+fmt.Println(data.Get("test"))
+```
+
+Another type of synchronization is **Wait Groups**.
+
+Wait groups allow an app to wait for goroutines to finish.
+
+The wait group blocks execution until the counter (of goroutines to wait for) is 0.
+
+For example:
+
+```go
+// Create a wait group
+var wg sync.WaitGroup
+
+// Operation to do that is long
+sum := 0
+for i := 0; i < 20; i++ {
+
+    // Increment the work group counter
+    wg.Add(i)
+    value := i
+
+    go func() {
+        // Defer the wait group completion signal at end of loop
+        defer wg.Done()
+        sum += value
+    }()
+}
+
+wg.Wait()
+fmt.Println("sum =", sum)
+```
